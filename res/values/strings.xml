@@ -1883,6 +1883,12 @@
     <!-- [CHAR LIMIT=40] Sound & display settings screen, title of dialog for picking font size -->
     <string name="dialog_title_font_size">Font size</string>
 
+    <!-- HDMI settings title -->
+    <string name="hdmi_settings">HDMI</string>
+    <string name="hdmi_resolution">HDMI Resolution</string>
+    <string name="hdmi_screen_zoom">HDMI Screen Zoom</string>
+    <string name="hdmi_screen_downsizing">HDMI Screen Downsizing</string>
+
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
     <!-- Security & location settings screen, setting option name -->
