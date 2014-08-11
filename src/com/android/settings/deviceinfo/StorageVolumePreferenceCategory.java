@@ -55,6 +55,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
     /** Physical volume being measured, or {@code null} for internal. */
     private final StorageVolume mVolume;
     private final StorageMeasurement mMeasure;
+    // psw0523 add for usb storage
+    private boolean mIsUsbStorage;
+    // end psw0523
 
     private final Resources mResources;
     private final StorageManager mStorageManager;
@@ -197,19 +200,49 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         }
 
         final boolean isRemovable = mVolume != null ? mVolume.isRemovable() : false;
+        // psw0523 add for usb storage
+        mIsUsbStorage = mVolume != null && mVolume.getPath().matches("/storage/usbdisk.");
+        // end psw0523
+
         // Always create the preference since many code rely on it existing
         mMountTogglePreference = new Preference(context);
         if (isRemovable) {
-            mMountTogglePreference.setTitle(R.string.sd_eject);
-            mMountTogglePreference.setSummary(R.string.sd_eject_summary);
+            // psw0523 patch for usb storage
+            int ejectID, ejectSummaryID;
+
+            if (mIsUsbStorage) {
+                ejectID = R.string.usb_eject;
+                ejectSummaryID = R.string.usb_eject_summary;
+            } else {
+                ejectID = R.string.sd_eject;
+                ejectSummaryID = R.string.sd_eject_summary;
+            }
+
+            //mMountTogglePreference.setTitle(R.string.sd_eject);
+            mMountTogglePreference.setTitle(ejectID);
+            //mMountTogglePreference.setSummary(R.string.sd_eject_summary);
+            mMountTogglePreference.setSummary(ejectSummaryID);
             addPreference(mMountTogglePreference);
         }
 
         final boolean allowFormat = mVolume != null;
         if (allowFormat) {
+            // psw0523 patch for usb storage
+            int formatID, formatSummaryID;
+
+            if (mIsUsbStorage) {
+                formatID = R.string.usb_format;
+                formatSummaryID = R.string.usb_format_summary;
+            } else {
+                formatID = R.string.sd_format;
+                formatSummaryID = R.string.sd_format_summary;
+            }
+
             mFormatPreference = new Preference(context);
-            mFormatPreference.setTitle(R.string.sd_format);
-            mFormatPreference.setSummary(R.string.sd_format_summary);
+            //mFormatPreference.setTitle(R.string.sd_format);
+            mFormatPreference.setTitle(formatID);
+            //mFormatPreference.setSummary(R.string.sd_format_summary);
+            mFormatPreference.setSummary(formatSummaryID);
             addPreference(mFormatPreference);
         }
 
@@ -250,18 +283,36 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
         if (Environment.MEDIA_MOUNTED.equals(state)
                 || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             mMountTogglePreference.setEnabled(true);
-            mMountTogglePreference.setTitle(mResources.getString(R.string.sd_eject));
-            mMountTogglePreference.setSummary(mResources.getString(R.string.sd_eject_summary));
+            // psw0523 fix for usb storage
+            if (mIsUsbStorage) {
+                mMountTogglePreference.setTitle(mResources.getString(R.string.usb_eject));
+                mMountTogglePreference.setSummary(mResources.getString(R.string.usb_eject_summary));
+            } else {
+                mMountTogglePreference.setTitle(mResources.getString(R.string.sd_eject));
+                mMountTogglePreference.setSummary(mResources.getString(R.string.sd_eject_summary));
+            }
         } else {
             if (Environment.MEDIA_UNMOUNTED.equals(state) || Environment.MEDIA_NOFS.equals(state)
                     || Environment.MEDIA_UNMOUNTABLE.equals(state)) {
                 mMountTogglePreference.setEnabled(true);
-                mMountTogglePreference.setTitle(mResources.getString(R.string.sd_mount));
-                mMountTogglePreference.setSummary(mResources.getString(R.string.sd_mount_summary));
+                // psw0523 fix for usb storage
+                if (mIsUsbStorage) {
+                    mMountTogglePreference.setTitle(mResources.getString(R.string.usb_mount));
+                    mMountTogglePreference.setSummary(mResources.getString(R.string.usb_mount_summary));
+                } else {
+                    mMountTogglePreference.setTitle(mResources.getString(R.string.sd_mount));
+                    mMountTogglePreference.setSummary(mResources.getString(R.string.sd_mount_summary));
+                }
             } else {
                 mMountTogglePreference.setEnabled(false);
-                mMountTogglePreference.setTitle(mResources.getString(R.string.sd_mount));
-                mMountTogglePreference.setSummary(mResources.getString(R.string.sd_insert_summary));
+                // psw0523 fix for usb storage
+                if (mIsUsbStorage) {
+                    mMountTogglePreference.setTitle(mResources.getString(R.string.usb_mount));
+                    mMountTogglePreference.setSummary(mResources.getString(R.string.usb_insert_summary));
+                } else {
+                    mMountTogglePreference.setTitle(mResources.getString(R.string.sd_mount));
+                    mMountTogglePreference.setSummary(mResources.getString(R.string.sd_insert_summary));
+                }
             }
 
             removePreference(mUsageBarPreference);
@@ -284,7 +335,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory {
             }
         } else if (mFormatPreference != null) {
             mFormatPreference.setEnabled(true);
-            mFormatPreference.setSummary(mResources.getString(R.string.sd_format_summary));
+            // psw0523 fix for usb storage
+            if (mIsUsbStorage)
+                mFormatPreference.setSummary(mResources.getString(R.string.usb_format_summary));
+            else
+                mFormatPreference.setSummary(mResources.getString(R.string.sd_format_summary));
         }
     }
 
