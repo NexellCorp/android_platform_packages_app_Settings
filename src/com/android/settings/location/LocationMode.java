@@ -19,6 +19,10 @@ package com.android.settings.location;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+// psw0523 add
+import android.os.SystemProperties;
+// end psw0523
+
 import com.android.settings.R;
 
 /**
@@ -41,6 +45,10 @@ public class LocationMode extends LocationSettingsBase
     private static final String KEY_SENSORS_ONLY = "sensors_only";
     private RadioButtonPreference mSensorsOnly;
 
+    // psw0523 add
+    private boolean mGPSEnabled = true;
+    // end psw0523
+
     @Override
     public void onResume() {
         super.onResume();
@@ -57,15 +65,26 @@ public class LocationMode extends LocationSettingsBase
         if (root != null) {
             root.removeAll();
         }
+
+        // psw0523 add for no gps
+        mGPSEnabled = (SystemProperties.get("ro.gps.enabled", "true").equals("true") ? true : false);
+        // end psw0523
+
         addPreferencesFromResource(R.xml.location_mode);
         root = getPreferenceScreen();
 
         mHighAccuracy = (RadioButtonPreference) root.findPreference(KEY_HIGH_ACCURACY);
         mBatterySaving = (RadioButtonPreference) root.findPreference(KEY_BATTERY_SAVING);
         mSensorsOnly = (RadioButtonPreference) root.findPreference(KEY_SENSORS_ONLY);
-        mHighAccuracy.setOnClickListener(this);
+        if (mGPSEnabled)
+            mHighAccuracy.setOnClickListener(this);
+        else
+            mHighAccuracy.setEnabled(false);
         mBatterySaving.setOnClickListener(this);
-        mSensorsOnly.setOnClickListener(this);
+        if (mGPSEnabled)
+            mSensorsOnly.setOnClickListener(this);
+        else
+            mSensorsOnly.setEnabled(false);
 
         refreshLocationMode();
         return root;

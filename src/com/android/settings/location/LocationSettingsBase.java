@@ -27,6 +27,10 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.util.Log;
 
+// psw0523 add
+import android.os.SystemProperties;
+// end psw0523
+
 import com.android.settings.SettingsPreferenceFragment;
 
 /**
@@ -59,7 +63,9 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
+        // psw0523 fix for remove gps
         mActive = true;
+        //mActive = false;
     }
 
     @Override
@@ -102,6 +108,13 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment
         if (mActive) {
             int mode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
                     Settings.Secure.LOCATION_MODE_OFF);
+            // psw0523 add for no gps
+            boolean gpsEnabled = (SystemProperties.get("ro.gps.enabled", "true").equals("true") ? true : false);
+            // end psw0523
+            if (!gpsEnabled) {
+                mode = Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
+                Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
+            }
             mCurrentMode = mode;
             onModeChanged(mode, isRestricted());
         }
