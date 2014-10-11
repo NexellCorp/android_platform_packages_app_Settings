@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   	android:focusable="true"  
+   	android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+    
+    
+    <LinearLayout
+        android:id="@+id/lay_eth_static"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dip"
+        >
+        
+        <LinearLayout 
+            android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_marginTop="15dp"
+	        android:layout_marginBottom="15dp"
+	        >
+	        
+            <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_state_lb"/>
+        
+	        <TextView
+	            android:id="@+id/eth_id_stateTV"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_state_disconnect"
+		        android:paddingLeft="30dp"
+		        />
+            
+            
+        </LinearLayout>
+        
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical"
+	        >
+	        <RadioGroup 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content">
+		        
+	            <RadioButton
+	                android:id="@+id/eth_ip_dhcp"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:checked="true"
+			        android:text="@string/eth_ip_hdcp"/>
+		        
+	            <RadioButton 
+	                android:id="@+id/eth_ip_static"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:text="@string/eth_ip_static"/>
+	        </RadioGroup>
+	    </LinearLayout>
+        
+	    
+	    <LinearLayout       
+	        android:id="@+id/eth_Edit_static"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:paddingTop="20dip"
+	        android:orientation="vertical"
+	        >
+	        <!-- android:visibility="gone" --> 
+	        <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_ip_address"/>
+	        <EditText 
+		        android:id="@+id/eth_ip_address"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:enabled="false"/>
+	        
+	        <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_gateway"/>
+	        <EditText 
+		        android:id="@+id/eth_gateway"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:enabled="false"/>
+	        
+	        <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_netmask"/>
+	        <EditText 
+		        android:id="@+id/eth_netmask"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:enabled="false"/>
+	        
+	        <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_dns1"/>
+	        <EditText 
+		        android:id="@+id/eth_dns1"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:enabled="false"/>
+	        
+	        <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_dns2"/>
+	        <EditText 
+		        android:id="@+id/eth_dns2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+				android:enabled="false"/>	        	
+		</LinearLayout>		
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:gravity="center"
+	        >
+	        <Button
+	        	android:id="@+id/eth_dhcp_cancel"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_dhcp_cancel"
+		        android:paddingRight="10dp"/>
+	        <Button
+	        	android:id="@+id/eth_dhcp_save"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/eth_dhcp_save"
+		        android:paddingLeft="10dp"/>
+	    </LinearLayout>
+    </LinearLayout>
+    
+    <TextView
+		    	android:id="@+id/hintText"
+		        android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+		        android:text="@string/eth_hintText"
+		        android:layout_gravity="center|center_horizontal|center_vertical"
+		        android:gravity="center|center_horizontal|center_vertical"
+		        android:visibility="gone"
+		        />
+
+</LinearLayout>

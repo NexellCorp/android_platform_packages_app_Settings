@@ -308,6 +308,7 @@ public class Settings extends PreferenceActivity
 
     private static final String[] ENTRY_FRAGMENTS = {
         WirelessSettings.class.getName(),
+        EthernetSettings.class.getName(),
         WifiSettings.class.getName(),
         AdvancedWifiSettings.class.getName(),
         BluetoothSettings.class.getName(),
@@ -1063,6 +1064,8 @@ public class Settings extends PreferenceActivity
      */
     public static class BluetoothSettingsActivity extends Settings { /* empty */ }
     public static class WirelessSettingsActivity extends Settings { /* empty */ }
+    //rio add for ethernet
+    public static class EthernetSettingsActivity extends Settings { /* empty */ }
     public static class TetherSettingsActivity extends Settings { /* empty */ }
     public static class VpnSettingsActivity extends Settings { /* empty */ }
     public static class DateTimeSettingsActivity extends Settings { /* empty */ }

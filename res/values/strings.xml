@@ -4917,4 +4917,39 @@
 
     <!-- Text to display in regulatory info screen (from device overlay). -->
     <string name="regulatory_info_text"></string>
+
+    <!-- Ethernet configuration dialog -->
+    <string name="eth_config_title">Configure Ethernet device</string>
+    <string name="eth_radio_title">Ethernet</string>
+    <string name="eth_setting">Ethernet setting</string>
+    <string name="eth_dev_list">Ethernet Devices:</string>
+    <string name="eth_con_type">Connection Type</string>
+    <string name="eth_con_type_dhcp">Dhcp</string>
+    <string name="eth_con_type_manual">Static IP</string>
+    <string name="eth_dns">DNS address</string>
+    <string name="eth_gw">Default Router</string>
+    <string name="eth_ipaddr">IP address</string>
+    <string name="eth_quick_toggle_title">Ethernet</string>
+    <string name="eth_quick_toggle_summary">Turn on Ethernet</string>
+    <string name="eth_radio_ctrl_title">Ethernet configuration</string>
+    <string name="eth_conf_perf_title">Ethernet configuration</string>
+    <string name="eth_conf_summary">Configure Ethernet devices</string>
+    <string name="eth_mask">Netmask</string>
+    <string name="eth_toggle_summary_off">Turn off Ethernet</string>
+    <string name="eth_toggle_summary_on">Turn on Ethernet</string>
+	<string name="eth_ip_hdcp">DHCP</string>
+	<string name="eth_ip_static">静态IP</string>
+	<string name="eth_ip_address">IP地址</string>
+	<string name="eth_gateway">网关</string>
+	<string name="eth_netmask">网络掩码</string>
+	<string name="eth_dns1">DNS1</string>
+	<string name="eth_dns2">DNS2</string>
+	<string name="eth_dhcp_cancel">返回</string>
+	<string name="eth_dhcp_save">保存</string>
+	<string name="eth_hintText">以太网已关闭，如果需开启以太网请点击开关开启。</string>
+	<string name="eth_state_lb">以太网络连接状态:</string>
+	<string name="eth_state_connect">已连接</string>
+	<string name="eth_state_disconnect">未连接</string>
+	
+	
 </resources>
