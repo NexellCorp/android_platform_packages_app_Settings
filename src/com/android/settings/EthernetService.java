@@ -177,27 +177,25 @@ public class EthernetService extends Service {
             		Log.e("EthernetService", "设置之前保存的IP信息"); 
             		setIpAndGateWay(ip, gw);
             	}
-            	if(connectNotify.icon!=R.drawable.network_connect)
-            	{
-	            	nm.cancel(1);
-	            	connectNotify.icon = R.drawable.network_connect;
-	            	connectNotify.flags = Notification.FLAG_ONGOING_EVENT;
-	            	connectNotify.setLatestEventInfo(context, "网线已插入", "网络已连接", pi);
-	            	nm.notify(1, connectNotify);
-            	}            	
+            
+            	nm.cancel(1);
+            	connectNotify.icon = R.drawable.network_connect;
+            	connectNotify.flags = Notification.FLAG_ONGOING_EVENT;
+            	connectNotify.setLatestEventInfo(context, "网线已插入", "网络已连接", pi);
+            	nm.notify(1, connectNotify);
+            	         	
             }
             else
             {
             	//Toast.makeText( context, "以太网络已断开", Toast.LENGTH_SHORT ).show();  
             	Log.e("EthernetService", "以太网络已断开");   
-            	if(connectNotify.icon!=R.drawable.network_disconnect)
-            	{
-	            	nm.cancel(1);
-	            	connectNotify.flags = Notification.FLAG_ONGOING_EVENT;
-	            	connectNotify.icon = R.drawable.network_disconnect;
-	            	connectNotify.setLatestEventInfo(context, "网线已拔出", "网络已断开连接", pi);
-	            	nm.notify(1, connectNotify);
-            	}
+            	
+            	nm.cancel(1);
+            	connectNotify.flags = Notification.FLAG_ONGOING_EVENT;
+            	connectNotify.icon = R.drawable.network_disconnect;
+            	connectNotify.setLatestEventInfo(context, "网线已拔出", "网络已断开连接", pi);
+            	nm.notify(1, connectNotify);
+            	
             }
         }   
     }  
