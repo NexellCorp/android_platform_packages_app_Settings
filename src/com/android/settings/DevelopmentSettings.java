@@ -472,7 +472,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateRuntimeValue();
         updateHdcpValues();
-        updatePasswordSummary();
+        // psw0523 fix for fdone
+        //updatePasswordSummary();
         updateDebuggerOptions();
         updateStrictModeVisualOptions();
         updatePointerLocationOptions();
