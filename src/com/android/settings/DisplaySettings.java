@@ -195,8 +195,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         String summary;
         if (currentTimeout < 0) {
             // Unsupported value
-            summary = "";
-        } else {
+		    summary = "";
+   		} else {
             final CharSequence[] entries = preference.getEntries();
             final CharSequence[] values = preference.getEntryValues();
             if (entries == null || entries.length == 0) {
@@ -209,8 +209,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                         best = i;
                     }
                 }
-                summary = preference.getContext().getString(R.string.screen_timeout_summary,
-                        entries[best]);
+				Log.d(TAG, "best = " + best);
+				if (best == 7)
+					summary = "No operation will never die";
+				else
+	                summary = preference.getContext().getString(R.string.screen_timeout_summary,
+	                        entries[best]);
             }
         }
         preference.setSummary(summary);
@@ -358,8 +362,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         final String key = preference.getKey();
         if (KEY_SCREEN_TIMEOUT.equals(key)) {
             try {
-                int value = Integer.parseInt((String) objValue);
-                Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
+//              int value = Integer.parseInt((String) objValue);
+                long value = Long.parseLong((String) objValue);
+//              Settings.System.putInt(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
+                Settings.System.putLong(getContentResolver(), SCREEN_OFF_TIMEOUT, value);
                 updateTimeoutPreferenceDescription(value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
