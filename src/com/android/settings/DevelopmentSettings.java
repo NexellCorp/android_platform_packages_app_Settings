@@ -834,7 +834,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             } else {
                 mPassword.setSummary(R.string.local_backup_password_summary_none);
             }
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             // Not much we can do here
         }
     }
