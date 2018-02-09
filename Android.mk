@@ -11,6 +11,11 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 # Build the Settings APK
 include $(CLEAR_VARS)
 
+ifeq ($(QUICKBOOT), 1)
+LOCAL_MANIFEST_FILE := AndroidManifestQuickboot.xml
+LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifestFull.xml
+endif
+
 LOCAL_JAVA_LIBRARIES := bouncycastle core-oj telephony-common ims-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
