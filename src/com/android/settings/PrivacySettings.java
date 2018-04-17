@@ -133,7 +133,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
                 try {
                     mBackupManager.setAutoRestore(nextValue);
                     result = true;
-                } catch (RemoteException e) {
+                } catch (Exception e) {
                     mAutoRestore.setChecked(!nextValue);
                 }
             }
@@ -166,7 +166,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
             mBackup.setSummary(backupEnabled
                     ? R.string.accessibility_feature_state_on
                     : R.string.accessibility_feature_state_off);
-        } catch (RemoteException e) {
+        } catch (Exception e) {
             // leave it 'false' and disable the UI; there's no backup manager
             mBackup.setEnabled(false);
         }
@@ -265,11 +265,15 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         final IBackupManager backupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
         boolean isServiceActive = false;
-        try {
-            isServiceActive = backupManager.isBackupServiceActive(UserHandle.myUserId());
-        } catch (RemoteException e) {
-            Log.w(TAG, "Failed querying backup manager service activity status. " +
-                    "Assuming it is inactive.");
+        if (backupManager != null) {
+            try {
+                isServiceActive = backupManager.isBackupServiceActive(UserHandle.myUserId());
+            } catch (Exception e) {
+                Log.w(TAG, "Failed querying backup manager service activity status. " +
+                        "Assuming it is inactive.");
+            }
+        } else {
+            Log.w(TAG, "backupManager is null so, inactive");
         }
         boolean vendorSpecific = context.getPackageManager().
                 resolveContentProvider(GSETTINGS_PROVIDER, 0) == null;
